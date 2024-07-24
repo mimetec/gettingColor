@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('Danielle');
+  const [age, setAge] = useState(90);
   const [person, setPerson] = useState({ name: 'Mario', age: 43 })
+  const [headline, setHeadline] = useState('Hello World!');
+  const [hexColors, setHexColors] = useState([
+    { name: 'goldenrod', hex: "daa520", key: '1'},
+    { name: 'gray', hex: "808080", key: '2'},
+    { name: 'grey', hex: "808080", key: '3'},
+    { name: 'green', hex: "008000", key: '4'},
+    { name: 'greenyellow', hex: "adff2f", key: '5'},
+    { name: 'honeydew', hex: "f0fff0", key: '6'},
+    { name: 'hotpink', hex: "ff69b4", key: '7'},
+    { name: 'indigo', hex: "4b0082", key: '8'},
+    { name: 'ivory', hex: "fffff0", key: '9'},
+    { name: 'khaki', hex: "f0e68c", key: '10'},
+    { name: 'lavender', hex: "e6e6fa", key: '11'}
+  ]);
 
   const clickHandler = () => {
     setName('Marc');
@@ -17,12 +32,38 @@ export default function App() {
         <Text style={styles.boldText}>gettingColor</Text>
       </View>
       <View style={styles.body}>
-        <Text>Welcome {name}!</Text>
-        <Text>His name is {person.name} and his age is {person.age} This is our body, what happens if there's more text than width of the screen</Text>
-        <Text>This is our body</Text>
         <View style={styles.buttonContainer}>
-          <Button title='update state name' onPress={clickHandler}/>
+          <Button title='update state name' onPress={clickHandler} />
         </View>
+        <Text>Enter Name:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='type your name here'
+          onChangeText={(val) => setName(val)}
+        />
+
+        <Text>Enter Age:</Text>
+        <TextInput
+          keyboardType='numeric'
+          style={styles.input}
+          placeholder='type your age here'
+          onChangeText={(val) => setAge(val)}
+        />
+
+        <Text>Enter headline:</Text>
+        <TextInput
+          multiline
+          style={styles.input}
+          placeholder='type your headline or pronouns here'
+          onChangeText={(val) => setHeadline(val)}
+        />
+
+        <Text>Welcome {name}! and age {age}</Text>
+        <Text>His name is {person.name} and his age is {person.age} This is our body, what happens if there's more text than width of the screen</Text>
+        <Text>This is our body and this next bit is our headline: 
+          <Text style={styles.h2}>{headline}</Text>
+        </Text>
+
       </View>
       <StatusBar style="auto" />
     </View>
@@ -33,12 +74,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 40,
+    paddingHorizontal: 20,
+    // alignItems: 'center',
+    // justifyContent: 'center'
   },
   header: {
     backgroundColor: 'green',
-    padding: 20,
+    padding: 20
   },
   boldText: {
     fontWeight: 'bold',
@@ -48,6 +91,21 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   buttonContainer: {
-    marginTop: 20
+    marginTop: 20,
+    marginBottom: 20
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 8,
+    margin: 10,
+    width: 200,
+    backgroundColor: 'white'
+  },
+  h2: {
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    textDecorationLine: 'underline',
+    display: 'flex',
   }
 });
