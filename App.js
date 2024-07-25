@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('Danielle');
@@ -31,6 +31,24 @@ export default function App() {
       <View style={styles.header}>
         <Text style={styles.boldText}>gettingColor</Text>
       </View>
+
+<ScrollView>
+      <View style={styles.listColors}>
+        {hexColors.map((item) => (
+              <View key={item.key}>
+                <Text 
+                // figure out how to mix external styles and the background color
+                  style={{ marginVertical: 10, padding: 10, color: 'black', backgroundColor: `#${item.hex}` }}
+                  >
+                    {item.name}
+                </Text>
+              </View>
+            ))}
+      </View>
+
+
+
+      {/* button and inputs commit */}
       <View style={styles.body}>
         <View style={styles.buttonContainer}>
           <Button title='update state name' onPress={clickHandler} />
@@ -65,6 +83,12 @@ export default function App() {
         </Text>
 
       </View>
+      
+      {/* end button and inputs commit */}
+
+</ScrollView>
+
+
       <StatusBar style="auto" />
     </View>
   );
