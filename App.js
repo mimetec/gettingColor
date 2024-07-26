@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
+import { Button } from './src/components';
 
 export default function App() {
   const [name, setName] = useState('Danielle');
@@ -50,9 +51,9 @@ export default function App() {
 
       {/* button and inputs commit */}
       <View style={styles.body}>
-        <View style={styles.buttonContainer}>
-          <Button title='update state name' onPress={clickHandler} />
-        </View>
+
+        <Button title='update state name' onPress={clickHandler} />
+
         <Text>Enter Name:</Text>
         <TextInput
           style={styles.input}
@@ -113,10 +114,6 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'lightgreen',
     color: 'white',
-  },
-  buttonContainer: {
-    marginTop: 20,
-    marginBottom: 20
   },
   input: {
     borderWidth: 1,
