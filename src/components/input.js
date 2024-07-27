@@ -1,20 +1,36 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, TextInput} from 'react-native';
+import {View, TextInput, StyleSheet} from 'react-native';
 
-const textInput = () => {
-  // const [text, onChangeText] = React.useState('Useless Text');
-  const [number, onChangeNumber] = React.useState('');
+export default function InputTextBox(props) {
+  const { onChangeText, 
+    value = 'Default value', 
+    placeholder = 'Default placeholder', 
+    inputMode = 'text',
+    rows = 4,
+    maxLength = 40,
+    readOnly = false,
+    multiline = false,
+   } = props;
 
+  // If you type something in the text box that is a color, 
+  // the background will change to that color.
   return (
-    <SafeAreaView>
+    <View
+      style={{
+        backgroundColor: value
+      }}>
       <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="useless placeholder"
-        inputMode="numeric"
+        readOnly={readOnly}
+        multiline={multiline}
+        rows={rows}
+        maxLength={maxLength}
+        onChangeText={onChangeText}
+        value={value}
+        style={multiline ? [styles.input, styles.multilineInput] : styles.input }
+        placeholder={placeholder}
+        inputMode={inputMode}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -24,7 +40,9 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    backgroundColor: 'white'
+  },
+  multilineInput: {
+    height: 100,
   },
 });
-
-export default textInput;

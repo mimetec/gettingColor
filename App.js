@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
-import { Button } from './src/components';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Button, Input } from './src/components';
 
 export default function App() {
   const [name, setName] = useState('Danielle');
@@ -55,24 +55,21 @@ export default function App() {
         <Button title='update state name' onPress={clickHandler} />
 
         <Text>Enter Name:</Text>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder='type your name here'
           onChangeText={(val) => setName(val)}
         />
 
         <Text>Enter Age:</Text>
-        <TextInput
-          keyboardType='numeric'
-          style={styles.input}
+        <Input
+          inputMode='numeric'
           placeholder='type your age here'
           onChangeText={(val) => setAge(val)}
         />
 
         <Text>Enter headline:</Text>
-        <TextInput
+        <Input
           multiline
-          style={styles.input}
           placeholder='type your headline or pronouns here'
           onChangeText={(val) => setHeadline(val)}
         />
@@ -114,14 +111,6 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'lightgreen',
     color: 'white',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'black',
-    padding: 8,
-    margin: 10,
-    width: 200,
-    backgroundColor: 'white'
   },
   h2: {
     fontWeight: 'bold',
