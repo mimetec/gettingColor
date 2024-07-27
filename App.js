@@ -1,121 +1,65 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { AppRegistry } from 'react-native';
+import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
+import { name as appName } from './app.json';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { Button, Input } from './src/components';
+import App from './src/App';
 
-export default function App() {
-  const [name, setName] = useState('Danielle');
-  const [age, setAge] = useState(90);
-  const [person, setPerson] = useState({ name: 'Mario', age: 43 })
-  const [headline, setHeadline] = useState('Hello World!');
-  const [hexColors, setHexColors] = useState([
-    { name: 'goldenrod', hex: "daa520", key: '1'},
-    { name: 'gray', hex: "808080", key: '2'},
-    { name: 'grey', hex: "808080", key: '3'},
-    { name: 'green', hex: "008000", key: '4'},
-    { name: 'greenyellow', hex: "adff2f", key: '5'},
-    { name: 'honeydew', hex: "f0fff0", key: '6'},
-    { name: 'hotpink', hex: "ff69b4", key: '7'},
-    { name: 'indigo', hex: "4b0082", key: '8'},
-    { name: 'ivory', hex: "fffff0", key: '9'},
-    { name: 'khaki', hex: "f0e68c", key: '10'},
-    { name: 'lavender', hex: "e6e6fa", key: '11'}
-  ]);
+const theme = {
+  ...DefaultTheme,
+  roundness: 0,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "rgb(206, 189, 255)",
+    onPrimary: "rgb(57, 5, 144)",
+    primaryContainer: "rgb(80, 43, 167)",
+    onPrimaryContainer: "rgb(232, 221, 255)",
+    secondary: "rgb(130, 219, 126)",
+    onSecondary: "rgb(0, 57, 10)",
+    secondaryContainer: "rgb(0, 83, 18)",
+    onSecondaryContainer: "rgb(157, 248, 152)",
+    tertiary: "rgb(255, 177, 194)",
+    onTertiary: "rgb(102, 0, 43)",
+    tertiaryContainer: "rgb(143, 0, 63)",
+    onTertiaryContainer: "rgb(255, 217, 223)",
+    error: "rgb(255, 180, 171)",
+    onError: "rgb(105, 0, 5)",
+    errorContainer: "rgb(147, 0, 10)",
+    onErrorContainer: "rgb(255, 180, 171)",
+    background: "rgb(28, 27, 30)",
+    onBackground: "rgb(230, 225, 230)",
+    surface: "rgb(28, 27, 30)",
+    onSurface: "rgb(230, 225, 230)",
+    surfaceVariant: "rgb(72, 69, 78)",
+    onSurfaceVariant: "rgb(202, 196, 207)",
+    outline: "rgb(148, 143, 153)",
+    outlineVariant: "rgb(72, 69, 78)",
+    shadow: "rgb(0, 0, 0)",
+    scrim: "rgb(0, 0, 0)",
+    inverseSurface: "rgb(230, 225, 230)",
+    inverseOnSurface: "rgb(49, 48, 51)",
+    inversePrimary: "rgb(104, 71, 192)",
+    elevation: {
+      level0: "transparent",
+      level1: "rgb(37, 35, 41)",
+      level2: "rgb(42, 40, 48)",
+      level3: "rgb(48, 45, 55)",
+      level4: "rgb(49, 46, 57)",
+      level5: "rgb(53, 50, 62)"
+    },
+    surfaceDisabled: "rgba(230, 225, 230, 0.12)",
+    onSurfaceDisabled: "rgba(230, 225, 230, 0.38)",
+    backdrop: "rgba(50, 47, 56, 0.4)"
+  },
+};
 
-  const clickHandler = () => {
-    setName('Marc');
-    setPerson({ name: 'Luigi', age: 37 })
-  }
-
+export default function Main() {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.boldText}>gettingColor</Text>
-      </View>
-
-<ScrollView>
-      <View style={styles.listColors}>
-        {hexColors.map((item) => (
-              <View key={item.key}>
-                <Text 
-                // figure out how to mix external styles and the background color
-                  style={{ marginVertical: 10, padding: 10, color: 'black', backgroundColor: `#${item.hex}` }}
-                  >
-                    {item.name}
-                </Text>
-              </View>
-            ))}
-      </View>
-
-
-
-      {/* button and inputs commit */}
-      <View style={styles.body}>
-
-        <Button title='update state name' onPress={clickHandler} />
-
-        <Text>Enter Name:</Text>
-        <Input
-          placeholder='type your name here'
-          onChangeText={(val) => setName(val)}
-        />
-
-        <Text>Enter Age:</Text>
-        <Input
-          inputMode='numeric'
-          placeholder='type your age here'
-          onChangeText={(val) => setAge(val)}
-        />
-
-        <Text>Enter headline:</Text>
-        <Input
-          multiline
-          placeholder='type your headline or pronouns here'
-          onChangeText={(val) => setHeadline(val)}
-        />
-
-        <Text>Welcome {name}! and age {age}</Text>
-        <Text>His name is {person.name} and his age is {person.age} This is our body, what happens if there's more text than width of the screen</Text>
-        <Text>This is our body and this next bit is our headline: 
-          <Text style={styles.h2}>{headline}</Text>
-        </Text>
-
-      </View>
-      
-      {/* end button and inputs commit */}
-
-</ScrollView>
-
-
+    <PaperProvider>
+      <App />
       <StatusBar style="auto" />
-    </View>
+    </PaperProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: 40,
-    paddingHorizontal: 20,
-    // alignItems: 'center',
-    // justifyContent: 'center'
-  },
-  header: {
-    backgroundColor: 'green',
-    padding: 20
-  },
-  boldText: {
-    fontWeight: 'bold',
-  },
-  body: {
-    backgroundColor: 'lightgreen',
-    color: 'white',
-  },
-  h2: {
-    fontWeight: 'bold',
-    fontStyle: 'italic',
-    textDecorationLine: 'underline',
-    display: 'flex',
-  }
-});
+AppRegistry.registerComponent(appName, () => Main);
